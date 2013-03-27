@@ -29,3 +29,8 @@ class IRawHTML(form.Schema, IImageScaleTraversable):
     """
     raw_html = schema.Text(title=u'HTML Code', required=True)
     type_tag = schema.TextLine(title=u'Meta type', required=False)
+    wrap_plone = schema.Bool(
+        title=_(u'Wrap with Plone theme'),
+        required=False,
+        default=False,
+    )

@@ -1,7 +1,23 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      i18n:domain="wcc.rawhtml" tal:replace="structure context/raw_html">
-</html>
+<metal:block>
+    <metal:block tal:condition="not:context/wrap_plone">
+        <html xml:lang="en"
+            lang="en"
+            tal:replace="structure context/raw_html">
+        </html>
+    </metal:block>
+
+    <metal:block tal:condition="context/wrap_plone">
+        <html xml:lang="en"
+            metal:use-macro="context/main_template/macros/master"
+            tal:condition="context/wrap_plone">
+
+            <body>
+                <metal:block fill-slot="content-core">
+                    <metal:block define-macro="content-core">
+                        <div tal:replace="structure context/raw_html"></div>
+                    </metal:block>
+                </metal:block>
+            </body>
+        </html>
+    </metal:block>
+</metal:block>
